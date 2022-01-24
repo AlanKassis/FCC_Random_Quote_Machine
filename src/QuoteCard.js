@@ -1,26 +1,31 @@
 import React from "react"
-import { render } from "react-dom"
-import RandomQuoteMachine from "./RandomQuoteMachine"
-import quotes from "./QuotesDatabase";
+
 //this is the view
 class QuoteCard extends React.Component {
   //still todo - create a stylesheet, figure out how to push to twitter, configure heroku and configure git
 
 render() {
     const quote = this.props.quote
-    const author = this.props.author    
+    const author = this.props.author
+    const color = this.props.color    
+    const html = document.documentElement; 
+    html.style.backgroundColor = color; 
+    const tweetUrl = `https://twitter.com/intent/tweet?url=${window.location.href}&text=${encodeURIComponent(quote)}${encodeURIComponent(author)}`
     return (
-      <div id="quote-box" style={{display:"flex", justifyContent:"center", height:"100vh"}}>
-        <div id="text">{quote}</div>
-        <div id="author">{author}</div>
-        <button onClick={this.props.handleChange} id="new-quote">
-          new quote
-        </button>
-        <button id="tweet-button">
-          <a href="twitter.com/intent/tweet" id="tweet-quote">
-            Tweet This
-          </a>
-        </button>
+      <div id="wrapper" style={{ backgroundColor: "white" }}>
+        <div id="quote-box" style={{ color: color }}>
+          <div id="text"> {quote}</div>
+          <div id="author">{author}</div>
+          <button onClick={this.props.handleChange} id="new-quote">
+            new quote
+          </button>
+          <button id="tweet-button">
+            {/* "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + encodeURIComponent(text); */}
+            <a href={tweetUrl} id="tweet-quote">
+              Tweet This
+            </a>
+          </button>
+        </div>
       </div>
     );
     }

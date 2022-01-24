@@ -13,15 +13,22 @@ class RandomQuoteMachine extends Component {
     this.getQuote = this.getQuote.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.shuffleQuotes = this.shuffleQuotes.bind(this)
+    this.getRandomColor = this.getRandomColor.bind(this)
     }
   getQuote(quotes){
     //get a random quote from the quotes array
- 
      let number = Math.floor(Math.random() * quotes.length)
     return quotes[number]
   }
   shuffleQuotes(quotes) {
     return quotes.sort(()=>Math.random()-0.5)
+  }
+  getRandomColor() {
+    const color = `rgb(
+      ${Math.floor(Math.random() * 155)},
+      ${Math.floor(Math.random() * 155)},
+      ${Math.floor(Math.random() * 155)})`
+      return color; 
   }
   handleChange = () => {
     let newQuote = this.getQuote(quotes)
@@ -30,10 +37,11 @@ class RandomQuoteMachine extends Component {
       author: newQuote.author  
     })
     this.shuffleQuotes(quotes)
+    this.getRandomColor()
   }
   render() {
-    return (
-     <QuoteCard handleChange = {this.handleChange} {...this.state} />
+    return (  
+     <QuoteCard handleChange = {this.handleChange} color = {this.getRandomColor()} {...this.state} />
     );
   }
   
