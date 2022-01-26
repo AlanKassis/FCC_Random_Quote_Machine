@@ -2,7 +2,7 @@ import React from "react"
 
 //this is the view
 class QuoteCard extends React.Component {
-  //still todo - create a stylesheet, figure out how to push to twitter, configure heroku and configure git
+  //still todo -   configure heroku and make buttons change styles 
 
 render() {
     const quote = this.props.quote
